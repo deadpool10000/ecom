@@ -11,8 +11,12 @@
                     <li class="nav-item"><a class="nav-link" href="add-product.php">Add product</a></li>
                     <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="checkout.php">Checkout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="delete-product.php">delete-product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="edit-product.php">edit-product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-product.php">manage-product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i> Login</a></li>
                 </ul>
             </div>
         </div>
