@@ -7,8 +7,9 @@ if(isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $confirmpassword = $_POST['confirmPassword'];
+    $email = $_POST['email'];
 
-    $select = "SELECT * FROM users WHERE username = '$username' ";
+    $select = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
     $checkUser = mysqli_query($link, $select);
 
     if(mysqli_num_rows($checkUser)>0) {
@@ -23,11 +24,12 @@ if(isset($_POST['submit'])) {
                   </script>";
         }else{
             $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-            $insert = "INSERT INTO users (username, password) VALUES ('$username', '$encrypted_password')";
+            $insert = "INSERT INTO users (username,email, password) VALUES ('$username', '$email', '$encrypted_password')";
             if(mysqli_query($link, $insert)) {
                 echo "<script>
                         alert('Registration successful');
                       </script>";
+            header("location: login.php");
             } else {
                 echo "<script>
                         alert('Registration failed. Please try again.');
@@ -80,11 +82,19 @@ if(isset($_POST['submit'])) {
             </div>
             <form id="registerForm" novalidate action ="" method="POST">
                 <div class="mb-3">
-                    <label for="registerEmail" class="form-label">Username</label>
+                    <label for="registerUsername" class="form-label">Username</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                        <input type="text" class="form-control" id="registerEmail" placeholder="Enter Username" name="username"required>
+                        <input type="text" class="form-control" id="registerUsername" placeholder="Enter Username" name="username"required>
                         <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="registerEmail" class="form-label">E-Mail</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="text" class="form-control" id="registerEmail" placeholder="Enter E-Mail" name="email"required>
+                        <div class="invalid-feedback">Please enter your e-mail.</div>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -106,7 +116,7 @@ if(isset($_POST['submit'])) {
                 <button type="submit" name="submit" class="btn btn-success w-100 py-2 mt-2">Register</button>
             </form>
             <div class="mt-3 text-center">
-                <a href="login.html" class="text-decoration-none">Already have an account? <span class="fw-semibold text-success">Login</span></a>
+                <a href="login.php" class="text-decoration-none">Already have an account? <span class="fw-semibold text-success">Login</span></a>
             </div>
         </div>
     </div>
@@ -132,7 +142,5 @@ if(isset($_POST['submit'])) {
         });
     </script>
 </body>
-<script>
-    alert('this username is already taken');
-</script>
+
 </html> 
