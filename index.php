@@ -1,4 +1,4 @@
-<php 
+<?php 
 
 require_once "./config.php";
 session_start();    
@@ -50,7 +50,7 @@ if(empty($_SESSION['id'])){
     <!-- Navbar -->
     <?php include "./includes/navbar.php" ?>
 
-
+    
     <!-- Hero Section -->
     <div class="container my-5">
         <div class="hero p-5 mb-5 text-center">
@@ -65,47 +65,31 @@ if(empty($_SESSION['id'])){
         <h2 class="mb-4 text-center fw-bold">Our Products</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <!-- Product 1 -->
-            <div class="col">
-                <div class="product-card card h-100">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top rounded-top" alt="Product 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 1</h5>
-                        <p class="card-text text-primary fw-semibold">$19.99</p>
-                        <div class="d-flex justify-content-between">
+             <?php
+                $select = "SELECT * FROM products";
+                if ($result = mysqli_query($link, $select)) {
+                if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {?>
+                    <div class="col">
+                    <div class="product-card card h-100">
+                        <img src="<?php echo $row['image_path'] ?>" class="card-img-top rounded-top" alt="Product 1">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo ($row['name']); ?></h5>
+                            <p class="card-text text-primary fw-semibold">$<?php echo ($row['product_price']); ?></p>
+                            <div class="d-flex justify-content-between">
                             <button class="btn btn-success btn-sm"><i class="bi bi-cart-plus"></i> Add to Cart</button>
                             <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> View Details</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="col">
-                <div class="product-card card h-100">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top rounded-top" alt="Product 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <p class="card-text text-primary fw-semibold">$29.99</p>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-success btn-sm"><i class="bi bi-cart-plus"></i> Add to Cart</button>
-                            <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Product 3 -->
-            <div class="col">
-                <div class="product-card card h-100">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top rounded-top" alt="Product 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 3</h5>
-                        <p class="card-text text-primary fw-semibold">$39.99</p>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-success btn-sm"><i class="bi bi-cart-plus"></i> Add to Cart</button>
-                            <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <?php }
+        }
+    }
+    ?>
+
+            
+          
             <!-- Add more products as needed -->
         </div>
     </div>
