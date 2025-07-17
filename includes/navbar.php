@@ -16,7 +16,15 @@
                     <li class="nav-item"><a class="nav-link" href="edit-product.php">edit-product</a></li>
                     <li class="nav-item"><a class="nav-link" href="manage-product.php">manage-product</a></li>
                     <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i> Login</a></li>
+                    <?php 
+                    
+                    if(empty($_SESSION['user_id'])){
+                        echo '<li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-person-circle"></i>Login</a></li>';
+                    } else {
+                        echo '<li class="nav-item"><a class="nav-link" href="logout.php"><i class="bi bi-person-circle"></i>Logout</a></li>'; 
+                    }
+                    
+                    ?>
                 </ul>
             </div>
         </div>

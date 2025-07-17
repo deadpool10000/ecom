@@ -17,6 +17,10 @@ require_once "./config.php";
 session_start();
 
 
+if(!empty($_SESSION['id'])){
+    header('location: index.php');
+}
+
 
 if(isset($_POST['submit'])) {
 
@@ -29,6 +33,7 @@ if(isset($_POST['submit'])) {
     if(mysqli_num_rows($result) > 0) {
         if(password_verify($password,$row['password'])) {
             $_SESSION['logged_in'] = true;
+            $_SESSION['id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
             
             header("location: index.php");
