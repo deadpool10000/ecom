@@ -1,3 +1,15 @@
+<?php 
+
+require_once './config.php';
+session_start();
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,27 +37,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src="https://via.placeholder.com/80x60" alt="Product 1" class="img-thumbnail" style="height: 60px;"></td>
-                        <td>Product 1</td>
-                        <td>$19.99</td>
-                        <td>Electronics</td>
-                        <td>
-                            <a href="edit-product.html" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="delete-product.html" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="https://via.placeholder.com/80x60" alt="Product 2" class="img-thumbnail" style="height: 60px;"></td>
-                        <td>Product 2</td>
-                        <td>$29.99</td>
-                        <td>Clothing</td>
-                        <td>
-                            <a href="edit-product.html" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="delete-product.html" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                    </tr>
-                    <!-- Add more products as needed -->
+                    <?php
+                    $select = "SELECT * FROM products";
+                    $result = mysqli_query($link, $select);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                            <tr>
+                                <td><img src="<?php echo $row['image_path']; ?>" alt="<?php echo $row['name']; ?>" class="img-thumbnail" style="height: 60px;"></td>
+                                <td><?php echo $row['name']; ?></td>
+                                <td>$<?php echo $row['product_price']; ?></td>
+                                <td><?php echo $row['category']; ?></td>
+                                <td>
+                                    <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="delete-product.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    } else {
+                        echo '<tr><td colspan="5">No products found</td></tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

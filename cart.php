@@ -1,20 +1,26 @@
+<?php
+require_once "./config.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - E-Commerce</title>
     <?php include "./includes/header.php" ?>
-
     <style>
         body {
             background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
         }
+
         .cart-card {
             border-radius: 1.5rem;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
             background: #fff;
         }
+
         .cart-summary {
             border-radius: 1rem;
             background: #f1f6fb;
@@ -22,10 +28,9 @@
         }
     </style>
 </head>
-<body>
-    <!-- Navbar -->
-    <?php include "./includes/navbar.php" ?>
 
+<body>
+    <?php include "./includes/navbar.php" ?>
     <div class="container py-5">
         <h2 class="mb-4 fw-bold text-center"><i class="bi bi-cart"></i> Shopping Cart</h2>
         <div class="row g-4">
@@ -38,28 +43,38 @@
                                     <th scope="col">Product</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Subtotal</th>
+                                    <!-- <th scope="col">Quantity</th>
+                                    <th scope="col">Subtotal</th> -->
                                     <th scope="col">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/80x60" class="img-thumbnail" style="height: 60px;" alt="Product 1"></td>
-                                    <td>Product 1</td>
-                                    <td>$19.99</td>
-                                    <td><input type="number" class="form-control form-control-sm w-50" value="1" min="1"></td>
-                                    <td>$19.99</td>
-                                    <td><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/80x60" class="img-thumbnail" style="height: 60px;" alt="Product 2"></td>
-                                    <td>Product 2</td>
-                                    <td>$29.99</td>
-                                    <td><input type="number" class="form-control form-control-sm w-50" value="2" min="1"></td>
-                                    <td>$59.98</td>
-                                    <td><button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button></td>
-                                </tr>
+
+                                <?php
+                                $product_ids = implode(',', array_unique($_SESSION['product_id']));
+
+                                $select = "SELECT * FROM products WHERE id IN($product_ids)";
+                                $result = mysqli_query($link, $select);
+
+                                if (mysqli_num_rows($result) > 0) {
+
+                                    while ($row = mysqli_fetch_array($result)) { ?>
+                                        <tr>
+                                            <td><img src="<?php echo $row['image_path']; ?>" class="img-thumbnail" style="height: 60px;" alt="Product 1"></td>
+                                            <td><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['product_price']; ?></td>
+                                            <!-- <td><input type="number" class="form-control form-control-sm w-50" value="1" min="1"></td>
+                                    <td><?php echo $row['price']; ?></td> -->
+                                            <td><a href="removecart.php?id=<?php echo $row['id'] ?>" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></a></td>
+                                        </tr>
+                                <?php }
+                                } else {
+                                    echo "no record found";
+                                }
+
+                                ?>
+
+
                                 <!-- More cart items as needed -->
                             </tbody>
                         </table>
@@ -87,8 +102,7 @@
             </div>
         </div>
     </div>
-    <!-- Footer -->
     <?php include "./includes/footer.php" ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+
+</html>
