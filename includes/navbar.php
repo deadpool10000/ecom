@@ -14,6 +14,10 @@
                     <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="manage-product.php">manage-product</a></li>
                     <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aaa.php">aaa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="eee.php">eee</a></li>
+
+
                     <?php 
                     
                     if(empty($_SESSION['id'])){

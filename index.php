@@ -75,7 +75,7 @@ if(empty($_SESSION['id'])){
                         <img src="<?php echo $row['image_path'] ?>" class="card-img-top rounded-top" alt="Product 1">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo ($row['name']); ?></h5>
-                            <p class="card-text text-primary fw-semibold">$<?php echo ($row['product_price']); ?></p>
+                            <p class="card-text text-primary fw-semibold">₹<?php echo ($row['product_price']); ?></p>
                             <div class="d-flex justify-content-between">
                             <a href ="addtocart.php?id=<?php echo $row['id'] ?>" class="btn btn-success btn-sm"><i class="bi bi-cart-plus"></i> Add to Cart</button>
                             <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye"></i> View Details</a>

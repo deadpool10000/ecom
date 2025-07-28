@@ -47,7 +47,7 @@ session_start();
                             <tr>
                                 <td><img src="<?php echo $row['image_path']; ?>" alt="<?php echo $row['name']; ?>" class="img-thumbnail" style="height: 60px;"></td>
                                 <td><?php echo $row['name']; ?></td>
-                                <td>$<?php echo $row['product_price']; ?></td>
+                                <td>₹<?php echo $row['product_price']; ?></td>
                                 <td><?php echo $row['category']; ?></td>
                                 <td>
                                     <a href="edit-product.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>

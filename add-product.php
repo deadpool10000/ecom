@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
                 <div class="invalid-feedback">Please enter a description.</div>
             </div>
             <div class="mb-3">
-                <label for="productPrice" class="form-label">Price ($)</label>
+                <label for="productPrice" class="form-label">Price (₹)</label>
                 <input type="number" class="form-control" name="price" id="productPrice" min="0" step="0.01" required>
                 <div class="invalid-feedback">Please enter a valid price.</div>
             </div>

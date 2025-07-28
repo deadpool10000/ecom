@@ -16,8 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $price = $_POST['product_price'];
     $category = $_POST['category'];
     
-    // Handle image upload
-    $image_path = $product['image_path']; // Default to existing image
+    $image_path = $product['image_path']; 
     if (!empty($_FILES['image']['name'])) {
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
